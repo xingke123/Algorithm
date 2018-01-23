@@ -1,0 +1,34 @@
+#include<iostream>
+#include<algorithm>
+
+#define MAX 101
+
+using namespace std;
+
+int D[MAX][MAX];
+int n;
+int MaxSum[MAX][MAX];
+
+int MaxSum(int i,int j)
+{
+    if(MaxSum[i][j]!=-1)
+        return MaxSum[i][j];
+    if(i==n)
+        MaxSum[i][j]=D[i][j];
+    else
+        MaxSum[i][j]=max(MaxSum(i+1,j),MaxSum(i+1,j+1))+D[i][j];
+    return MaxSum[i][j];
+}
+
+int main()
+{
+    cin>>n;
+    for(int i=1;i<=n;++i)
+        for(int j=1;j<=i;++j)
+            {
+                cin>>D[i][j];
+                MaxSum[i][j]=-1;
+            }
+    cout<<MaxSum(1,1)<<endl;
+    return 0;
+}
